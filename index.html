@@ -1,1 +1,609 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10251d">
+  <title>المؤشر الرقمي للوضع الدفاعي</title>
+  <style>
+    :root {
+      --bg: #f3f6f4;
+      --green: #176b48;
+      --dark: #10251d;
+      --light: #e4f3e9;
+      --border: #dce5df;
+      --text: #20342a;
+      --muted: #738078;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 25px 18px 22px;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      background: #d6f4df;
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 6px;
+      line-height: 1.5;
+    }
+
+    header p {
+      font-size: 12px;
+      color: #c3d8ca;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 18px 14px 35px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      margin: 22px 2px 12px;
+      font-weight: 800;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 13px;
+      box-shadow: 0 3px 12px #132c1b08;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 45px;
+      border: 1px solid #d7e1da;
+      border-radius: 11px;
+      padding: 11px;
+      font-size: 15px;
+      background: #fff;
+      color: var(--text);
+      margin-bottom: 15px;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid > div { min-width: 0; }
+
+    .button {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 7px;
+    }
+
+    .primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .secondary {
+      background: var(--light);
+      color: var(--green);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .stat {
+      padding: 16px 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .stat-value {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--green);
+      margin-top: 5px;
+    }
+
+    .notice {
+      background: #fff8e8;
+      border: 1px solid #f0dfb6;
+      padding: 13px;
+      border-radius: 12px;
+      color: #735821;
+      font-size: 12px;
+      line-height: 1.9;
+      margin-top: 12px;
+    }
+
+    .measure-row {
+      display: grid;
+      grid-template-columns: 1fr 105px;
+      gap: 10px;
+      align-items: center;
+      border-bottom: 1px solid #edf0ed;
+      padding: 9px 0;
+    }
+
+    .measure-row:last-child { border-bottom: 0; }
+
+    .measure-row span {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .measure-row input {
+      margin: 0;
+      min-height: 40px;
+    }
+
+    .video-box {
+      border: 2px dashed #cbd9cf;
+      background: #f8fbf9;
+      padding: 20px 12px;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .video-box .symbol {
+      font-size: 34px;
+      margin-bottom: 7px;
+    }
+
+    .video-box p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .video-box input {
+      margin: 12px 0 0;
+      font-size: 12px;
+    }
+
+    .record {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .hidden { display: none; }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.9;
+      padding: 15px;
+    }
+
+    @media (max-width: 360px) {
+      .grid { grid-template-columns: 1fr; gap: 0; }
+      .measure-row { grid-template-columns: 1fr 90px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">🏀</div>
+    <div>
+      <h1>المؤشر الرقمي لجودة الوضع الدفاعي</h1>
+      <p>كرة السلة · اللاعبين الناشئين · 13–15 سنة</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="section-title">لوحة التحكم</div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">عدد السجلات المحفوظة</div>
+      <div class="stat-value" id="totalRecords">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">القياسات المدخلة</div>
+      <div class="stat-value" id="totalMeasures">0</div>
+    </div>
+  </div>
+
+  <div class="section-title">١. بيانات اللاعب</div>
+
+  <section class="card">
+    <div class="grid">
+      <div>
+        <label for="playerName">اسم اللاعب</label>
+        <input id="playerName" placeholder="اسم اللاعب">
+      </div>
+      <div>
+        <label for="playerCode">رمز اللاعب</label>
+        <input id="playerCode" placeholder="P01">
+      </div>
+      <div>
+        <label for="playerAge">العمر</label>
+        <select id="playerAge">
+          <option value="13">13 سنة</option>
+          <option value="14">14 سنة</option>
+          <option value="15">15 سنة</option>
+        </select>
+      </div>
+      <div>
+        <label for="playerSide">زاوية التصوير</label>
+        <select id="playerSide">
+          <option value="أمامي">أمامي</option>
+          <option value="جانبي">جانبي</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="stance">نوع الوقفة الدفاعية</label>
+    <select id="stance">
+      <option value="الوقفة المتوازية">الوقفة المتوازية</option>
+      <option value="وقفة الملاكمة">وقفة الملاكمة</option>
+    </select>
+
+    <label for="movement">نوع التحرك الدفاعي</label>
+    <select id="movement">
+      <option value="ثبات واستعداد">ثبات واستعداد</option>
+      <option value="تحرك أمامي">تحرك أمامي</option>
+      <option value="تحرك خلفي">تحرك خلفي</option>
+      <option value="تحرك جانبي">تحرك جانبي</option>
+      <option value="خطوات متقاطعة">خطوات متقاطعة</option>
+    </select>
+  </section>
+
+  <div class="section-title">٢. الفيديو</div>
+
+  <section class="card">
+    <div class="video-box">
+      <div class="symbol">🎥</div>
+      <strong>اختيار فيديو اللاعب</strong>
+      <p>اختاري مقطعًا مصورًا من الهاتف لإرفاقه بالسجل.</p>
+      <input type="file" id="videoFile" accept="video/*">
+      <p id="videoName">لم يتم اختيار فيديو بعد.</p>
+    </div>
+    <p style="font-size:12px;line-height:1.9;color:#738078">
+      هذه الواجهة تتيح اختيار الفيديو فقط. تحليل المفاصل تلقائيًا يحتاج إلى ربط نموذج MediaPipe.
+    </p>
+  </section>
+
+  <div class="section-title">٣. القياسات البايوميكانيكية</div>
+
+  <section class="card">
+    <p style="font-size:12px;line-height:1.8;color:#738078">
+      أدخلي القياسات المستخرجة من التحليل. الزوايا بالدرجات، والسرعات الزاوية بالدرجة/ثانية، والإزاحات بالبكسل إذا كانت هذه وحدة المصدر.
+    </p>
+
+    <div id="measurements"></div>
+
+    <label for="notes">ملاحظات الباحثة</label>
+    <textarea id="notes" placeholder="ملاحظات حول الأداء أو التصوير"></textarea>
+
+    <button class="button primary" id="saveBtn">حفظ سجل القياسات</button>
+    <button class="button secondary" id="exportBtn">تصدير السجلات CSV</button>
+  </section>
+
+  <div class="section-title">٤. نتيجة المؤشر</div>
+
+  <section class="card">
+    <div class="stat-label">الدرجة الرقمية (0–100)</div>
+    <div class="stat-value" id="score">غير محسوبة</div>
+
+    <div class="notice">
+      لا تُعرض درجة جودة نهائية في هذه النسخة؛ لأن الأوزان المرجعية والتحقق من المعيار لم يُستكملا بعد. إدخال القياسات وحده لا يكفي لإثبات جودة الأداء.
+    </div>
+  </section>
+
+  <div class="section-title">٥. السجلات المحفوظة</div>
+
+  <section class="card">
+    <div id="recordsList">
+      لا توجد سجلات محفوظة بعد.
+    </div>
+    <button class="button secondary" id="clearBtn">حذف جميع السجلات من هذا المتصفح</button>
+  </section>
+
+</main>
+
+<footer>
+  نموذج أولي للبحث العلمي · المؤشر الرقمي لجودة الوضع الدفاعي في كرة السلة
+  <br>
+  القياسات والنتائج تحتاج إلى التحقق العلمي قبل استخدامها في تقييم اللاعبين.
+</footer>
+
+<script>
+  const variables = [
+    ["rightKnee", "زاوية الركبة اليمنى", "deg"],
+    ["leftKnee", "زاوية الركبة اليسرى", "deg"],
+    ["rightHip", "زاوية الورك اليمنى", "deg"],
+    ["leftHip", "زاوية الورك اليسرى", "deg"],
+    ["rightElbow", "زاوية المرفق الأيمن", "deg"],
+    ["leftElbow", "زاوية المرفق الأيسر", "deg"],
+    ["trunkTilt", "ميل الجذع", "deg"],
+    ["ankleDistance", "المسافة بين الكاحلين", "حسب المصدر"],
+    ["stanceRatio", "نسبة المسافة بين الكاحلين إلى عرض الكتفين", "نسبة"],
+    ["relativeHipHeight", "الارتفاع النسبي للورك", "حسب المصدر"],
+    ["horizontalDisplacement", "الإزاحة الأفقية", "حسب المصدر"],
+    ["rightKneeRate", "معدل تغير زاوية الركبة اليمنى", "deg/s"],
+    ["leftKneeRate", "معدل تغير زاوية الركبة اليسرى", "deg/s"],
+    ["rightHipRate", "معدل تغير زاوية الورك اليمنى", "deg/s"],
+    ["leftHipRate", "معدل تغير زاوية الورك اليسرى", "deg/s"],
+    ["rightElbowRate", "معدل تغير زاوية المرفق الأيمن", "deg/s"],
+    ["leftElbowRate", "معدل تغير زاوية المرفق الأيسر", "deg/s"],
+    ["trunkRate", "معدل تغير ميل الجذع", "deg/s"],
+    ["displacementRate", "معدل الإزاحة الأفقية", "حسب المصدر"],
+    ["visibility", "موثوقية/رؤية المفاصل", "0–1"]
+  ];
+
+  const measurements = document.getElementById("measurements");
+
+  variables.forEach(([id, label, unit]) => {
+    const row = document.createElement("div");
+    row.className = "measure-row";
+
+    const name = document.createElement("span");
+    name.textContent = label + " (" + unit + ")";
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.step = "any";
+    input.id = id;
+    input.placeholder = "—";
+    input.setAttribute("aria-label", label);
+
+    row.append(name, input);
+    measurements.appendChild(row);
+  });
+
+  const STORE_KEY = "defensive_index_records_v1";
+  let records = [];
+
+  try {
+    records = JSON.parse(localStorage.getItem(STORE_KEY) || "[]");
+    if (!Array.isArray(records)) records = [];
+  } catch (error) {
+    records = [];
+  }
+
+  document.getElementById("videoFile").addEventListener("change", function () {
+    const file = this.files && this.files[0];
+    document.getElementById("videoName").textContent =
+      file ? file.name : "لم يتم اختيار فيديو بعد.";
+  });
+
+  function updateDashboard() {
+    document.getElementById("totalRecords").textContent = records.length;
+    document.getElementById("totalMeasures").textContent =
+      records.reduce((sum, record) => {
+        return sum + Object.values(record.measurements).filter(
+          value => value !== ""
+        ).length;
+      }, 0);
+
+    const list = document.getElementById("recordsList");
+    list.replaceChildren();
+
+    if (!records.length) {
+      list.textContent = "لا توجد سجلات محفوظة بعد.";
+      return;
+    }
+
+    records.slice().reverse().forEach(record => {
+      const item = document.createElement("div");
+      item.className = "record";
+
+      const title = document.createElement("strong");
+      title.textContent = (record.playerCode || "بدون رمز") +
+        " — " + (record.playerName || "لا يوجد اسم");
+
+      const details = document.createElement("div");
+      details.textContent =
+        "العمر: " + record.age +
+        " | التصوير: " + record.cameraSide +
+        " | الوقفة: " + record.stance +
+        " | التحرك: " + record.movement;
+
+      const count = Object.values(record.measurements).filter(
+        value => value !== ""
+      ).length;
+
+      const completion = document.createElement("div");
+      completion.textContent =
+        "القياسات المدخلة: " + count + " من " + variables.length;
+
+      item.append(title, details, completion);
+      list.appendChild(item);
+    });
+  }
+
+  function saveRecords() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(records));
+      return true;
+    } catch (error) {
+      alert("تعذر الحفظ في المتصفح. صدّري السجلات للاحتفاظ بنسخة.");
+      return false;
+    }
+  }
+
+  document.getElementById("saveBtn").addEventListener("click", function () {
+    const playerName = document.getElementById("playerName").value.trim();
+    const playerCode = document.getElementById("playerCode").value.trim();
+    const age = Number(document.getElementById("playerAge").value);
+
+    if (!playerCode) {
+      alert("يرجى إدخال رمز اللاعب مثل P01.");
+      document.getElementById("playerCode").focus();
+      return;
+    }
+
+    if (!playerName) {
+      alert("يرجى إدخال اسم اللاعب أو رمزًا وصفيًا غير كاشف للهوية.");
+      document.getElementById("playerName").focus();
+      return;
+    }
+
+    const values = {};
+    variables.forEach(([id]) => {
+      values[id] = document.getElementById(id).value;
+    });
+
+    const fileInput = document.getElementById("videoFile");
+    const file = fileInput.files && fileInput.files[0];
+
+    const record = {
+      id: Date.now(),
+      playerName,
+      playerCode,
+      age,
+      cameraSide: document.getElementById("playerSide").value,
+      stance: document.getElementById("stance").value,
+      movement: document.getElementById("movement").value,
+      videoName: file ? file.name : "",
+      notes: document.getElementById("notes").value.trim(),
+      measurements: values,
+      savedAt: new Date().toISOString()
+    };
+
+    records.push(record);
+
+    if (saveRecords()) {
+      updateDashboard();
+      alert("تم حفظ سجل القياسات في هذا المتصفح.");
+    }
+  });
+
+  document.getElementById("exportBtn").addEventListener("click", function () {
+    if (!records.length) {
+      alert("لا توجد سجلات لتصديرها.");
+      return;
+    }
+
+    const headers = [
+      "playerCode", "playerName", "age", "cameraSide",
+      "stance", "movement", "videoName", "notes", "savedAt",
+      ...variables.map(item => item[0])
+    ];
+
+    const quote = value =>
+      '"' + String(value ?? "").replace(/"/g, '""') + '"';
+
+    const rows = records.map(record => [
+      record.playerCode,
+      record.playerName,
+      record.age,
+      record.cameraSide,
+      record.stance,
+      record.movement,
+      record.videoName,
+      record.notes,
+      record.savedAt,
+      ...variables.map(([id]) => record.measurements[id] ?? "")
+    ]);
+
+    const csv = "\uFEFF" +
+      [headers, ...rows].map(row => row.map(quote).join(",")).join("\r\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "defensive_index_measurements.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (!confirm("هل أنتِ متأكدة من حذف جميع السجلات المحفوظة في هذا المتصفح؟")) {
+      return;
+    }
+
+    records = [];
+    try {
+      localStorage.removeItem(STORE_KEY);
+    } catch (error) {
+      alert("تعذر مسح التخزين المحلي.");
+    }
+
+    updateDashboard();
+  });
+
+  updateDashboard();
+</script>
+
+</body>
+</html>
+
+
